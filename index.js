@@ -1,44 +1,38 @@
-const table= document.querySelector("body");
+const main= document.querySelector("body");
 const cont= document.getElementsByClassName("container");
 const tr= document.getElementsByClassName("table table-striped");
- console.log(tr)
+const mnt= document.getElementsByName("thead") ; 
+console.log(mnt)
 
- const tables= (Id,Image,Category,Description,Price,Delete )=>{
-    const table=`<table class=" table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Image</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Delete</th>
-        
-       
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>${Id}</td>
-        <td>${Image}</td>
-        <td>${Category}</td>
-        <td>${Description}</td>
-        <td>${Price}</td>
-        <td>${Delete}</td>
-      </tr>`
-    
-    
+ const data=async()=>{
+    const fet= await (await fetch("https://fakestoreapi.com/products")).json();
+    console.log(fet)
+    fet.map(item=>{
+        const card=`<table class=" table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Delete</th>
+            
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${item.id}</td>
+            <td><img src = ${item.image}</td>
+            <td>${item.category}</td>
+            <td>${item.description}</td>
+            <td>${item.price}</td>
+            <td>${item.delete}</td>
+          </tr>`
+     main.innerHTML+=card;    
+    })
+ }
+ data()
 
-      part.innerHTML+=table;
-}
 
-const dany= fetch("https://fakestoreapi.com/products")
-
-  .then(dany=>dany.json())
-  .then(table=>{console.log(table)
-
-    console.log(dany)
- dany.map(item=>{
-    tables(item.Id,item.Image,item.Category,item.Description,item.Price,item.Delete)
- })
-})
